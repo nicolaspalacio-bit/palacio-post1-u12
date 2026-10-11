@@ -1,0 +1,21 @@
+package com.empresa.reembolsos.procesamiento.notificacion;
+
+import com.empresa.reembolsos.dominio.EstadoSolicitud;
+import com.empresa.reembolsos.dominio.SolicitudReembolso;
+import org.springframework.stereotype.Component;
+
+/**
+ * Observador del area de Contabilidad.
+ * Reacciona unicamente ante solicitudes en estado APROBADA para programar el desembolso.
+ */
+@Component
+public class NotificadorContabilidad implements ObservadorCambioEstado {
+
+    @Override
+    public void onCambioEstado(SolicitudReembolso solicitud, EstadoSolicitud estadoAnterior) {
+        if (solicitud.getEstado() == EstadoSolicitud.APROBADA) {
+            System.out.println("Contabilidad: programar pago de " + solicitud.getMontoAprobado()
+                    + " para " + solicitud.getEmpleadoId());
+        }
+    }
+}
