@@ -1,17 +1,19 @@
 package com.empresa.reembolsos.procesamiento.validacion;
 
 import com.empresa.reembolsos.dominio.SolicitudReembolso;
+import com.empresa.reembolsos.infraestructura.RepositorioSolicitudesJpa;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * Validador que verifica la inexistencia de solicitudes pendientes duplicadas
- * para el mismo empleado, categoria y periodo mensual.
- * Opera puramente en memoria sin acceder a persistencia ni infraestructura.
+ * Validador con violacion intencional de arquitectura para verificar el fallo del pipeline en CI.
  */
 @Component
 public class ValidadorDuplicados extends ValidadorSolicitud {
+
+    // Violacion intencional de la Regla 1 de ArchUnit:
+    private RepositorioSolicitudesJpa repositorioProhibido;
 
     @Override
     protected ResultadoValidacion validarPropio(SolicitudReembolso solicitud, List<SolicitudReembolso> pendientes) {
